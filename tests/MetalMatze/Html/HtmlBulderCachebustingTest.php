@@ -34,7 +34,7 @@ class HtmlBulderCachebustingUnitTests extends PHPUnit_Framework_TestCase
         $this->assertEquals('<link media="all" type="text/css" rel="stylesheet" href="http://example.com/main.css">'.PHP_EOL, $actual);
     }
 
-    public function testStyle()
+    public function testStyleBust()
     {
         $this->filesystem->shouldReceive('exists')->once()->with('main.css')->andReturn(true);
         $this->md5->shouldReceive('file')->once()->with('main.css')->andReturn('b273ce');
