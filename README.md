@@ -37,3 +37,6 @@ Once this operation completes, the final step is to add the service provider. Op
     'MetalMatze\Html\HtmlServiceProvider'
 
 **DO NOT replace it with laravel's default `Illuminate\Html\HtmlServiceProvider` since there would be no Form.**
+
+### Adding the redirect to your `.htaccess`
+    RewriteRule ^(css|js)/(.+)\.([0-9a-f]{32})\.(js|css|png|jpg|gif)$ /(css|js)/$1.$3 [L]
