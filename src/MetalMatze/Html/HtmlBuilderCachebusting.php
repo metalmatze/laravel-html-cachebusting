@@ -33,6 +33,17 @@ class HtmlBuilderCachebusting extends HtmlBuilder {
         return parent::style($url, $attributes);
     }
 
+    public function scriptBust($url, $attributes = array())
+    {
+        if($this->filesystem->exists($url))
+        {
+            $md5 = $this->md5->file($url);
+            $url = $this->insertBeforeExtension($url, ".$md5.");   
+        }
+
+        return parent::script($url, $attributes);
+    }
+
     public function insertBeforeExtension($filename, $insert = null)
     {
         if(is_null($insert))

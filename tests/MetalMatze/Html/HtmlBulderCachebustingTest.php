@@ -44,7 +44,28 @@ class HtmlBulderCachebustingUnitTests extends PHPUnit_Framework_TestCase
         $actual = $this->newHtmlBuilderCachebusting()->styleBust('main.css');
 
         $this->assertEquals('<link media="all" type="text/css" rel="stylesheet" href="http://example.com/main.b273ce.css">'.PHP_EOL, $actual);
+    }
 
+    public function testScriptBustFileNonExisting()
+    {
+        $this->filesystem->shouldReceive('exists')->once()->with('main.js')->andReturn(false);
+        $this->url->shouldReceive('asset')->once()->with('main.js')->andReturn('http://example.com/main.js');
+
+        $actual = $this->newHtmlBuilderCachebusting()->scriptBust('main.js');
+
+        $this->assertEquals('<script src="http://example.com/main.js"></script>'.PHP_EOL, $actual);
+    }
+
+    public function testScriptBust()
+    {
+        $this->filesystem->shouldReceive('exists')->once()->with('main.js')->andReturn(true);
+        $this->md5->shouldReceive('file')->once()->with('main.js')->andReturn('b273ce');
+        $this->filesystem->shouldReceive('extension')->once()->with('main.js')->andReturn('js');
+        $this->url->shouldReceive('asset')->once()->with('main.b273ce.js')->andReturn('http://example.com/main.b273ce.js');
+
+        $actual = $this->newHtmlBuilderCachebusting()->scriptBust('main.js');
+
+        $this->assertEquals('<script src="http://example.com/main.b273ce.js"></script>'.PHP_EOL, $actual);
     }
 
     public function testInsertBeforeExtension()
