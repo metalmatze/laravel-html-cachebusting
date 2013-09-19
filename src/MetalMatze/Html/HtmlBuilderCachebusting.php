@@ -4,7 +4,7 @@ namespace MetalMatze\Html;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Html\HtmlBuilder;
 use Illuminate\Routing\UrlGenerator;
-use MetalMatze\MD5\MD5Interface as MD5;
+use MetalMatze\MD5\MD5;
 
 class HtmlBuilderCachebusting extends HtmlBuilder {
 
