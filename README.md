@@ -24,7 +24,7 @@ Begin by installing this package through Composer. Edit your project's `composer
 
     "require": {
         "laravel/framework": "4.0.*",
-        "metalmatze\laravel-html-cachebusting": "dev-master"
+        "metalmatze/laravel-html-cachebusting": "dev-master"
     },
     "minimum-stability" : "dev"
 
