@@ -1,6 +1,7 @@
-<?php 
+<?php
 
-use MetalMatze\Html\HtmlBuilderCachebusting;
+use \MetalMatze\Html\HtmlBuilderCachebusting;
+use \Mockery;
 
 class HtmlBulderCachebustingUnitTests extends PHPUnit_Framework_TestCase
 {
