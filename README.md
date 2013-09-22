@@ -2,6 +2,8 @@
 
 Extends laravel's HtmlBuilder with styleBust() &amp; scriptBust() which insert the file's md5 to the url.
 
+[![Build Status](https://travis-ci.org/MetalMatze/laravel-html-cachebusting.png?branch=master)](https://travis-ci.org/MetalMatze/laravel-html-cachebusting)
+
 This package enables you to bust the browser cache by placing a md5 checksum into the filename of your asset.
 
 Busting the cache for css files:
