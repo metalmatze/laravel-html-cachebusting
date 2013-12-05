@@ -1,7 +1,8 @@
-<?php
+<?php namespace MetalMatze;
 
-use \MetalMatze\Html\HtmlBuilderCachebusting;
-use \Mockery;
+use MetalMatze\Html\HtmlBuilderCachebusting;
+use Mockery;
+use PHPUnit_Framework_TestCase;
 
 class HtmlBulderCachebustingUnitTests extends PHPUnit_Framework_TestCase
 {
@@ -10,14 +11,14 @@ class HtmlBulderCachebustingUnitTests extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->url = \Mockery::mock('Illuminate\Routing\UrlGenerator');
-        $this->filesystem = \Mockery::mock('Illuminate\Filesystem\Filesystem');
-        $this->md5 = \Mockery::mock('MetalMatze\MD5\MD5');
+        $this->url = Mockery::mock('Illuminate\Routing\UrlGenerator');
+        $this->filesystem = Mockery::mock('Illuminate\Filesystem\Filesystem');
+        $this->md5 = Mockery::mock('MetalMatze\MD5\MD5');
     }
 
     public function tearDown()
     {
-        \Mockery::close();
+        Mockery::close();
     }
 
     private function newHtmlBuilderCachebusting()
@@ -86,5 +87,4 @@ class HtmlBulderCachebustingUnitTests extends PHPUnit_Framework_TestCase
 
         $this->assertEquals('main.css', $actual);
     }
-
 }
