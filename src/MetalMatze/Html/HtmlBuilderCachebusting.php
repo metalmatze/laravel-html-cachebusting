@@ -7,7 +7,6 @@ use MetalMatze\MD5\MD5;
 
 class HtmlBuilderCachebusting extends HtmlBuilder
 {
-
     protected $url;
     protected $filesystem;
     protected $md5;
