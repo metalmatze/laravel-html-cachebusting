@@ -5,11 +5,15 @@
     "authors": [
         {
             "name": "MetalMatze",
-            "email": "contact@metalmatze.de"
+            "email": "me@metalmatze.de",
+            "homepage": "http://metalmatze.de/",
+            "role": "Developer"
         }
     ],
     "autoload": {
-        "psr-0": { "MetalMatze": "src/" }
+        "psr-0": {
+            "MetalMatze": "src/"
+        }
     },
     "minimum-stability": "dev",
     "require": {
@@ -19,6 +23,6 @@
     },
     "require-dev": {
         "mockery/mockery": "dev-master",
-        "phpunit/phpunit": "3.8.*@dev"
+        "phpunit/phpunit": "3.7.*"
     }
 }
