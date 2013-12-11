@@ -1,12 +1,12 @@
-<?php
-namespace MetalMatze\Html;
+<?php namespace MetalMatze\Html;
 
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Html\HtmlBuilder;
 use Illuminate\Routing\UrlGenerator;
 use MetalMatze\MD5\MD5;
 
-class HtmlBuilderCachebusting extends HtmlBuilder {
+class HtmlBuilderCachebusting extends HtmlBuilder
+{
 
     protected $url;
     protected $filesystem;
@@ -24,8 +24,7 @@ class HtmlBuilderCachebusting extends HtmlBuilder {
 
     public function styleBust($url, $attributes = array())
     {
-        if($this->filesystem->exists($url))
-        {
+        if ($this->filesystem->exists($url)) {
             $md5 = $this->md5->file($url);
             $url = $this->insertBeforeExtension($url, ".$md5.");
         }
@@ -35,10 +34,9 @@ class HtmlBuilderCachebusting extends HtmlBuilder {
 
     public function scriptBust($url, $attributes = array())
     {
-        if($this->filesystem->exists($url))
-        {
+        if ($this->filesystem->exists($url)) {
             $md5 = $this->md5->file($url);
-            $url = $this->insertBeforeExtension($url, ".$md5.");   
+            $url = $this->insertBeforeExtension($url, ".$md5.");
         }
 
         return parent::script($url, $attributes);
@@ -46,13 +44,13 @@ class HtmlBuilderCachebusting extends HtmlBuilder {
 
     public function insertBeforeExtension($filename, $insert = null)
     {
-        if(is_null($insert))
+        if (is_null($insert)) {
             return $filename;
+        }
 
         $extension = $this->filesystem->extension($filename);
         $extensionWithDotLength = (strlen($extension) + 1);
 
-        return substr_replace($filename ,$insert, -$extensionWithDotLength).$extension;
+        return substr_replace($filename, $insert, -$extensionWithDotLength).$extension;
     }
-
 }
