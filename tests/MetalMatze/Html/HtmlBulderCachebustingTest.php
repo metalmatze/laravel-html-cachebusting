@@ -8,6 +8,7 @@ class HtmlBulderCachebustingUnitTests extends PHPUnit_Framework_TestCase
 {
     private $url;
     private $filesystem;
+    private $md5;
 
     public function setUp()
     {
