@@ -21,7 +21,7 @@ class HtmlBulderCachebustingUnitTests extends PHPUnit_Framework_TestCase
         Mockery::close();
     }
 
-    private function newHtmlBuilderCachebusting()
+    private function htmlBuilderCachebusting()
     {
         return new HtmlBuilderCachebusting($this->url, $this->filesystem, $this->md5);
     }
@@ -31,7 +31,7 @@ class HtmlBulderCachebustingUnitTests extends PHPUnit_Framework_TestCase
         $this->filesystem->shouldReceive('exists')->once()->with('main.css')->andReturn(false);
         $this->url->shouldReceive('asset')->once()->with('main.css')->andReturn('http://example.com/main.css');
 
-        $actual = $this->newHtmlBuilderCachebusting()->styleBust('main.css');
+        $actual = $this->htmlBuilderCachebusting()->styleBust('main.css');
 
         $this->assertEquals('<link media="all" type="text/css" rel="stylesheet" href="http://example.com/main.css">'.PHP_EOL, $actual);
     }
@@ -43,7 +43,7 @@ class HtmlBulderCachebustingUnitTests extends PHPUnit_Framework_TestCase
         $this->filesystem->shouldReceive('extension')->once()->with('main.css')->andReturn('css');
         $this->url->shouldReceive('asset')->once()->with('main.b273ce.css')->andReturn('http://example.com/main.b273ce.css');
 
-        $actual = $this->newHtmlBuilderCachebusting()->styleBust('main.css');
+        $actual = $this->htmlBuilderCachebusting()->styleBust('main.css');
 
         $this->assertEquals('<link media="all" type="text/css" rel="stylesheet" href="http://example.com/main.b273ce.css">'.PHP_EOL, $actual);
     }
@@ -53,7 +53,7 @@ class HtmlBulderCachebustingUnitTests extends PHPUnit_Framework_TestCase
         $this->filesystem->shouldReceive('exists')->once()->with('main.js')->andReturn(false);
         $this->url->shouldReceive('asset')->once()->with('main.js')->andReturn('http://example.com/main.js');
 
-        $actual = $this->newHtmlBuilderCachebusting()->scriptBust('main.js');
+        $actual = $this->htmlBuilderCachebusting()->scriptBust('main.js');
 
         $this->assertEquals('<script src="http://example.com/main.js"></script>'.PHP_EOL, $actual);
     }
@@ -65,7 +65,7 @@ class HtmlBulderCachebustingUnitTests extends PHPUnit_Framework_TestCase
         $this->filesystem->shouldReceive('extension')->once()->with('main.js')->andReturn('js');
         $this->url->shouldReceive('asset')->once()->with('main.b273ce.js')->andReturn('http://example.com/main.b273ce.js');
 
-        $actual = $this->newHtmlBuilderCachebusting()->scriptBust('main.js');
+        $actual = $this->htmlBuilderCachebusting()->scriptBust('main.js');
 
         $this->assertEquals('<script src="http://example.com/main.b273ce.js"></script>'.PHP_EOL, $actual);
     }
@@ -74,7 +74,7 @@ class HtmlBulderCachebustingUnitTests extends PHPUnit_Framework_TestCase
     {
         $this->filesystem->shouldReceive('extension')->once()->with('main.css')->andReturn('css');
 
-        $actual = $this->newHtmlBuilderCachebusting()->insertBeforeExtension('main.css', '.foo.');
+        $actual = $this->htmlBuilderCachebusting()->insertBeforeExtension('main.css', '.foo.');
 
         $this->assertEquals('main.foo.css', $actual);
     }
@@ -83,7 +83,7 @@ class HtmlBulderCachebustingUnitTests extends PHPUnit_Framework_TestCase
     {
         $this->filesystem->shouldReceive('extension')->never();
 
-        $actual = $this->newHtmlBuilderCachebusting()->insertBeforeExtension('main.css');
+        $actual = $this->htmlBuilderCachebusting()->insertBeforeExtension('main.css');
 
         $this->assertEquals('main.css', $actual);
     }
