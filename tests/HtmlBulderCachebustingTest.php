@@ -14,7 +14,7 @@ class HtmlBulderCachebustingUnitTests extends PHPUnit_Framework_TestCase
     {
         $this->url = Mockery::mock('Illuminate\Routing\UrlGenerator');
         $this->filesystem = Mockery::mock('Illuminate\Filesystem\Filesystem');
-        $this->md5 = Mockery::mock('MetalMatze\MD5\MD5');
+        $this->md5 = Mockery::mock('MetalMatze\Html\MD5');
     }
 
     public function tearDown()

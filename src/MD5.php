@@ -1,5 +1,4 @@
-<?php 
-namespace MetalMatze\MD5;
+<?php namespace MetalMatze\Html;
 
 class MD5
 {

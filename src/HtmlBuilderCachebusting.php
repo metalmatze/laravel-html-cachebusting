@@ -3,7 +3,7 @@
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Html\HtmlBuilder;
 use Illuminate\Routing\UrlGenerator;
-use MetalMatze\MD5\MD5;
+use MetalMatze\Html\MD5;
 
 class HtmlBuilderCachebusting extends HtmlBuilder
 {

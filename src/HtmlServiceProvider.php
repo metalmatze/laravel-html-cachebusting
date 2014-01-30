@@ -1,8 +1,7 @@
-<?php
-namespace MetalMatze\Html;
+<?php namespace MetalMatze\Html;
 
 use Illuminate\Support\ServiceProvider;
-use MetalMatze\MD5\MD5;
+use MetalMatze\Html\MD5;
 
 class HtmlServiceProvider extends ServiceProvider
 {
@@ -32,7 +31,7 @@ class HtmlServiceProvider extends ServiceProvider
     protected function registerHtmlBuilder()
     {
         $this->app['html'] = $this->app->share(function ($app) {
-            return new HtmlBuilderCachebusting($app['url'], $app['files'], new MD5);
+            return new HtmlBuilderCachebusting($app['url'], $app['files'], new MD5());
         });
     }
 
