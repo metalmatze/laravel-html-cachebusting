@@ -11,8 +11,8 @@
         }
     ],
     "autoload": {
-        "psr-0": {
-            "MetalMatze": "src/"
+        "psr-4": {
+            "MetalMatze\\Html\\": "src/"
         }
     },
     "minimum-stability": "dev",
