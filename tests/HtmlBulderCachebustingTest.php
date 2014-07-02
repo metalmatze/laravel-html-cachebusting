@@ -9,12 +9,29 @@ class HtmlBulderCachebustingUnitTests extends PHPUnit_Framework_TestCase
     private $url;
     private $filesystem;
     private $md5;
+    private $config;
 
     public function setUp()
     {
-        $this->url = Mockery::mock('Illuminate\Routing\UrlGenerator');
+        $this->url        = Mockery::mock('Illuminate\Routing\UrlGenerator');
         $this->filesystem = Mockery::mock('Illuminate\Filesystem\Filesystem');
-        $this->md5 = Mockery::mock('MetalMatze\Html\MD5');
+        $this->md5        = Mockery::mock('MetalMatze\Html\MD5');
+
+        $this->_initConfigMock();
+    }
+
+    private function _initConfigMock() {
+        $this->config = Mockery::mock('Illuminate\Config\Repository');
+
+        $this->_addGetActionToConfigMock("laravel-html-cachebusting::enabled", true);
+        $this->_addGetActionToConfigMock("laravel-html-cachebusting::extensions", array("js", "css"));
+        $this->_addGetActionToConfigMock("laravel-html-cachebusting::format", ".%s.");
+    }
+
+    private function _addGetActionToConfigMock($key, $value) {
+        $this->config->shouldReceive("get")
+            ->withArgs(array($key, \Mockery::any()))
+            ->andReturn($value);
     }
 
     public function tearDown()
@@ -24,13 +41,13 @@ class HtmlBulderCachebustingUnitTests extends PHPUnit_Framework_TestCase
 
     private function htmlBuilderCachebusting()
     {
-        return new HtmlBuilderCachebusting($this->url, $this->filesystem, $this->md5);
+        return new HtmlBuilderCachebusting($this->url, $this->filesystem, $this->config, $this->md5);
     }
 
     public function testStyleBustFileNonExisting()
     {
         $this->filesystem->shouldReceive('exists')->once()->with('main.css')->andReturn(false);
-        $this->url->shouldReceive('asset')->once()->with('main.css')->andReturn('http://example.com/main.css');
+        $this->url->shouldReceive('asset')->once()->with('main.css', '')->andReturn('http://example.com/main.css');
 
         $actual = $this->htmlBuilderCachebusting()->styleBust('main.css');
 
