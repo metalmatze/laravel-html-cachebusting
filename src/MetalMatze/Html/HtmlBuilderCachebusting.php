@@ -4,7 +4,6 @@ use Illuminate\Config\Repository;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Html\HtmlBuilder;
 use Illuminate\Routing\UrlGenerator;
-use Illuminate\Support\Facades\Config;
 use MetalMatze\Html\MD5;
 
 class HtmlBuilderCachebusting extends HtmlBuilder
@@ -15,7 +14,7 @@ class HtmlBuilderCachebusting extends HtmlBuilder
     protected $format;
     protected $isBustingEnabled;
     protected $bustableAssetExtensions;
-    protected $configPrefix = "cache.assets-buster";
+    protected $configPrefix = "laravel-html-cachebusting";
 
     public function __construct(
         UrlGenerator $url      = null,
@@ -35,7 +34,7 @@ class HtmlBuilderCachebusting extends HtmlBuilder
     }
 
     private function readConfig($key, $default=null) {
-        return $this->config->get(sprintf("%s.%s", $this->configPrefix, $key), $default);
+        return $this->config->get(sprintf("%s::%s", $this->configPrefix, $key), $default);
     }
 
     /**

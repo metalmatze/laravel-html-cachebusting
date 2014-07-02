@@ -10,11 +10,6 @@
             "role": "Developer"
         }
     ],
-    "autoload": {
-        "psr-4": {
-            "MetalMatze\\Html\\": "src/"
-        }
-    },
     "minimum-stability": "dev",
     "require": {
         "illuminate/filesystem": ">=4.0",
@@ -24,5 +19,10 @@
     "require-dev": {
         "mockery/mockery": "dev-master",
         "phpunit/phpunit": "3.7.*"
+    },
+    "autoload": {
+        "psr-0": {
+            "MetalMatze\\Html": "src/"
+        }
     }
 }
