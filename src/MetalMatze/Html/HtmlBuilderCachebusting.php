@@ -29,7 +29,7 @@ class HtmlBuilderCachebusting extends HtmlBuilder
         $this->config     = $config;
 
         $this->isBustingEnabled        = $this->readConfig("enabled", false);
-        $this->format                  = $format ?: $this->readConfig("format", ".%s");
+        $this->format                  = $format ?: $this->readConfig("format", ".%s.");
         $this->bustableAssetExtensions = $this->readConfig("extensions", array());
     }
 

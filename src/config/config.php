@@ -2,7 +2,7 @@
 
 return array(
     'enabled'    => true,
-    'format'     => '.%s',
+    'format'     => '.%s.',
     'extensions' => array(
         'js', 'css'
     )
