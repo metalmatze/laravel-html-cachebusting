@@ -108,7 +108,6 @@ class HtmlBuilderCachebusting extends HtmlBuilder
         $isBustableExtension     = in_array($extension, $this->bustableAssetExtensions);
 
         $isBustableAsset         = $overrideConfig || ($isBustableExtension && $this->isBustingEnabled);
-        var_dump($this->isBustingEnabled);
         if (!$isBustableAsset) { // Is non-bustable extension and config not overridden?
             return $filename;
         }
