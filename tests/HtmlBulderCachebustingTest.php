@@ -18,7 +18,12 @@ class HtmlBulderCachebustingUnitTests extends PHPUnit_Framework_TestCase
         $this->md5        = Mockery::mock('MetalMatze\Html\MD5');
     }
 
-    private function _buildConfigMock($configMap = null) {
+    public function tearDown()
+    {
+        Mockery::close();
+    }
+
+    private function buildConfigMock($configMap = null) {
         $configMock = Mockery::mock('Illuminate\Config\Repository');
 
         $defaultConfigMap = array(
@@ -31,7 +36,7 @@ class HtmlBulderCachebustingUnitTests extends PHPUnit_Framework_TestCase
 
         $packagePrefix = "laravel-html-cachebusting";
         foreach( $configMap as $setting => $value ) {
-            $this->_addGetActionToConfigMock(
+            $this->addGetActionToConfigMock(
                 $configMock,
                 sprintf("%s::%s", $packagePrefix, $setting),
                 $value
@@ -41,17 +46,12 @@ class HtmlBulderCachebustingUnitTests extends PHPUnit_Framework_TestCase
         return $configMock;
     }
 
-    private function _addGetActionToConfigMock($configMock, $key, $value) {
+    private function addGetActionToConfigMock($configMock, $key, $value) {
         $configMock->shouldReceive("get")
             ->withArgs(array($key, \Mockery::any()))
             ->andReturn($value);
 
         return $configMock;
-    }
-
-    public function tearDown()
-    {
-        Mockery::close();
     }
 
     private function htmlBuilderCachebusting(Repository $config)
@@ -61,7 +61,7 @@ class HtmlBulderCachebustingUnitTests extends PHPUnit_Framework_TestCase
 
     public function testStyleBustFileNonExisting()
     {
-        $configMock = $this->_buildConfigMock();
+        $configMock = $this->buildConfigMock();
 
         $this->filesystem
             ->shouldReceive('exists')
@@ -85,7 +85,7 @@ class HtmlBulderCachebustingUnitTests extends PHPUnit_Framework_TestCase
 
     public function testStyleBust()
     {
-        $configMock = $this->_buildConfigMock();
+        $configMock = $this->buildConfigMock();
 
         $this->filesystem
             ->shouldReceive('exists')
@@ -121,7 +121,7 @@ class HtmlBulderCachebustingUnitTests extends PHPUnit_Framework_TestCase
 
     public function testScriptBustFileNonExisting()
     {
-        $configMock = $this->_buildConfigMock();
+        $configMock = $this->buildConfigMock();
 
         $this->filesystem
             ->shouldReceive('exists')
@@ -142,7 +142,7 @@ class HtmlBulderCachebustingUnitTests extends PHPUnit_Framework_TestCase
 
     public function testScriptBust()
     {
-        $configMock = $this->_buildConfigMock();
+        $configMock = $this->buildConfigMock();
 
         $this->filesystem
             ->shouldReceive('exists')
@@ -175,7 +175,7 @@ class HtmlBulderCachebustingUnitTests extends PHPUnit_Framework_TestCase
 
     public function testInsertBeforeExtension()
     {
-        $configMock = $this->_buildConfigMock();
+        $configMock = $this->buildConfigMock();
 
         $this->filesystem
             ->shouldReceive('extension')
@@ -190,7 +190,7 @@ class HtmlBulderCachebustingUnitTests extends PHPUnit_Framework_TestCase
 
     public function testInsertBeforeExtensionEmptyInsert()
     {
-        $configMock = $this->_buildConfigMock();
+        $configMock = $this->buildConfigMock();
 
         $this->filesystem
             ->shouldReceive('extension')
@@ -203,7 +203,7 @@ class HtmlBulderCachebustingUnitTests extends PHPUnit_Framework_TestCase
 
     public function testDontBustIfDisabled()
     {
-        $configMock = $this->_buildConfigMock(array("enabled" => false));
+        $configMock = $this->buildConfigMock(array("enabled" => false));
 
         $this->filesystem
             ->shouldReceive('extension')
@@ -218,7 +218,7 @@ class HtmlBulderCachebustingUnitTests extends PHPUnit_Framework_TestCase
 
     public function testDontBustIfNonBustableExtensions()
     {
-        $configMock = $this->_buildConfigMock(array("extensions" => array()));
+        $configMock = $this->buildConfigMock(array("extensions" => array()));
 
         $this->filesystem
             ->shouldReceive('extension')
