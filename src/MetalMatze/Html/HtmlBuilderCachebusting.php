@@ -104,7 +104,7 @@ class HtmlBuilderCachebusting extends HtmlBuilder
         }
 
         $extension               = $this->filesystem->extension($filename);
-        $extensionLengthWidthDot = strlen($extension) + 1;
+        $extensionWithDotLength  = strlen($extension) + 1;
         $isBustableExtension     = in_array($extension, $this->bustableAssetExtensions);
 
         $isBustableAsset         = $overrideConfig || ($isBustableExtension && $this->isBustingEnabled);
@@ -112,7 +112,7 @@ class HtmlBuilderCachebusting extends HtmlBuilder
             return $filename;
         }
 
-        $fileNameWithCacheBuster = substr_replace($filename, $insert, -$extensionLengthWidthDot);
+        $fileNameWithCacheBuster = substr_replace($filename, $insert, -$extensionWithDotLength);
 
         return sprintf("%s%s", $fileNameWithCacheBuster, $extension);
     }
