@@ -5,7 +5,6 @@ use MetalMatze\Html\MD5;
 
 class HtmlServiceProvider extends ServiceProvider
 {
-
     /**
      * Indicates if loading of the provider is deferred.
      *
@@ -13,7 +12,8 @@ class HtmlServiceProvider extends ServiceProvider
      */
     protected $defer = true;
 
-    public function boot() {
+    public function boot()
+    {
         $this->package("metalmatze/laravel-html-cachebusting");
     }
 

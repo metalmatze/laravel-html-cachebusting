@@ -13,9 +13,9 @@ class HtmlBulderCachebustingUnitTests extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->url        = Mockery::mock('Illuminate\Routing\UrlGenerator');
+        $this->url = Mockery::mock('Illuminate\Routing\UrlGenerator');
         $this->filesystem = Mockery::mock('Illuminate\Filesystem\Filesystem');
-        $this->md5        = Mockery::mock('MetalMatze\Html\MD5');
+        $this->md5 = Mockery::mock('MetalMatze\Html\MD5');
     }
 
     public function tearDown()
@@ -23,19 +23,21 @@ class HtmlBulderCachebustingUnitTests extends PHPUnit_Framework_TestCase
         Mockery::close();
     }
 
-    private function buildConfigMock($configMap = null) {
+    private function buildConfigMock($configMap = null)
+    {
         $configMock = Mockery::mock('Illuminate\Config\Repository');
 
         $defaultConfigMap = array(
-            "enabled"    => true,
+            "enabled" => true,
             "extensions" => array("js", "css"),
-            "format"     => ".%s."
+            "format" => ".%s."
         );
 
         $configMap = !empty($configMap) ? array_merge($defaultConfigMap, $configMap) : $defaultConfigMap;
 
         $packagePrefix = "laravel-html-cachebusting";
-        foreach( $configMap as $setting => $value ) {
+        
+        foreach ($configMap as $setting => $value) {
             $this->addGetActionToConfigMock(
                 $configMock,
                 sprintf("%s::%s", $packagePrefix, $setting),
@@ -46,7 +48,8 @@ class HtmlBulderCachebustingUnitTests extends PHPUnit_Framework_TestCase
         return $configMock;
     }
 
-    private function addGetActionToConfigMock($configMock, $key, $value) {
+    private function addGetActionToConfigMock($configMock, $key, $value)
+    {
         $configMock->shouldReceive("get")
             ->withArgs(array($key, \Mockery::any()))
             ->andReturn($value);

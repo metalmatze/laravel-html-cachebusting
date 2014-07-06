@@ -17,11 +17,11 @@ class HtmlBuilderCachebusting extends HtmlBuilder
     protected $configPrefix = "laravel-html-cachebusting";
 
     public function __construct(
-        UrlGenerator $url      = null,
+        UrlGenerator $url = null,
         Filesystem $filesystem = null,
-        Repository $config     = null,
-        MD5 $md5               = null,
-        $format                = null
+        Repository $config = null,
+        MD5 $md5 = null,
+        $format = null
     ) {
         $this->url        = $url;
         $this->filesystem = $filesystem;
@@ -33,7 +33,8 @@ class HtmlBuilderCachebusting extends HtmlBuilder
         $this->bustableAssetExtensions = $this->readConfig("extensions", array());
     }
 
-    private function readConfig($key, $default=null) {
+    private function readConfig($key, $default = null)
+    {
         return $this->config->get(sprintf("%s::%s", $this->configPrefix, $key), $default);
     }
 
@@ -117,7 +118,8 @@ class HtmlBuilderCachebusting extends HtmlBuilder
         return sprintf("%s%s", $fileNameWithCacheBuster, $extension);
     }
 
-    private function tryBuildBustableUrl($url, $overrideConfig = false) {
+    private function tryBuildBustableUrl($url, $overrideConfig = false)
+    {
         if (!$this->filesystem->exists($url)) {
             return $url;
         }

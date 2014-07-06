@@ -1,8 +1,8 @@
 <?php
 
 return array(
-    'enabled'    => true,
-    'format'     => '.%s.',
+    'enabled' => true,
+    'format' => '.%s.',
     'extensions' => array(
         'js', 'css'
     )
