@@ -6,7 +6,7 @@ For a cache buster providing more functionality, have a look at [Laravel Cachebu
 [![Build Status](https://travis-ci.org/MetalMatze/laravel-html-cachebusting.png?branch=master)](https://travis-ci.org/MetalMatze/laravel-html-cachebusting)
 
 ### Cache busting via configuration
-After installation of this package calls to ```HTML::script``` and ```HTML::style``` will not automatically apply cache busting. To change this, publish the package configuration using Artisan. 
+After installation of this package calls to ```HTML::script``` and ```HTML::style``` will _not_ automatically apply cache busting. To change this, publish the package configuration using Artisan. 
 
 	php artisan config:publish metalmatze/laravel-html-cachebusting
 
@@ -14,7 +14,7 @@ This copies the file ```config.php``` into ```<app-config-directory>/packages/me
 
 Aside from that the configuration requires a white-list of extensions that should be busted, which by default is set to .js and .css files.
 
-And the ```format``` setting makes it possible format the cache buster string _a little bit_, it is essentially an ```sprintf``` formatter, which expects exactly one ```%s```.  
+And the ```format``` setting makes it possible to format the cache buster string _a little bit_; it is essentially an ```sprintf``` formatter, which expects exactly one ```%s```.  
 
 ### Explicit cache busting
 **Note**: explicit cache busting overrides the ```enabled``` setting of the configuration file.
@@ -58,6 +58,6 @@ Once this operation completes, the final step is to add the service provider. Op
     rewrite "^(.+)\.([0-9a-f]{32})\.(js|css|png|jpg|gif)$" /$1.$3;
 
 ## Contributing
-This package adheres to PSR-2 standards, so before commiting make sure your code is PSR-2 error free. To test compliance run
+This package adheres to PSR-2 standards, so before committing make sure your code is PSR-2 error free. To test compliance run
 
 	php vendor/bin/phpcs --standard=PSR2 src/ tests/```.
