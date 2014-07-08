@@ -5,13 +5,17 @@ use MetalMatze\Html\MD5;
 
 class HtmlServiceProvider extends ServiceProvider
 {
-
     /**
      * Indicates if loading of the provider is deferred.
      *
      * @var bool
      */
     protected $defer = true;
+
+    public function boot()
+    {
+        $this->package("metalmatze/laravel-html-cachebusting");
+    }
 
     /**
      * Register the service provider.
@@ -31,7 +35,7 @@ class HtmlServiceProvider extends ServiceProvider
     protected function registerHtmlBuilder()
     {
         $this->app['html'] = $this->app->share(function ($app) {
-            return new HtmlBuilderCachebusting($app['url'], $app['files'], new MD5());
+            return new HtmlBuilderCachebusting($app['url'], $app['files'], $app['config'], new MD5());
         });
     }
 
