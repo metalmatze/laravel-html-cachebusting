@@ -28,7 +28,7 @@ class HtmlBulderCachebustingUnitTests extends PHPUnit_Framework_TestCase
         $configMock = Mockery::mock('Illuminate\Config\Repository');
 
         $defaultConfigMap = array(
-            "enabled" => true,
+            "enabled" => false,
             "extensions" => array("js", "css"),
             "format" => ".%s."
         );
@@ -214,7 +214,7 @@ class HtmlBulderCachebustingUnitTests extends PHPUnit_Framework_TestCase
             ->with('main.css')
             ->andReturn('css');
 
-        $actual = $this->htmlBuilderCachebusting($configMock)->insertBeforeExtension('main.css', '.foo.');
+        $actual = $this->htmlBuilderCachebusting($configMock)->insertBeforeExtension('main.css', '.foo.', false);
 
         $this->assertEquals('main.css', $actual);
     }
@@ -229,7 +229,7 @@ class HtmlBulderCachebustingUnitTests extends PHPUnit_Framework_TestCase
             ->with('main.css')
             ->andReturn('css');
 
-        $actual = $this->htmlBuilderCachebusting($configMock)->insertBeforeExtension('main.css', '.foo.');
+        $actual = $this->htmlBuilderCachebusting($configMock)->insertBeforeExtension('main.css', '.foo.', false);
 
         $this->assertEquals('main.css', $actual);
     }

@@ -98,7 +98,7 @@ class HtmlBuilderCachebusting extends HtmlBuilder
         return $this->styleBust($url, $attributes, $secure, false);
     }
 
-    public function insertBeforeExtension($filename, $insert = null, $overrideConfig = false)
+    public function insertBeforeExtension($filename, $insert = null, $overrideConfig = true)
     {
         if (is_null($insert)) {
             return $filename;

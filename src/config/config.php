@@ -1,7 +1,7 @@
 <?php
 
 return array(
-    'enabled' => true,
+    'enabled' => false,
     'format' => '.%s.',
     'extensions' => array(
         'js', 'css'
