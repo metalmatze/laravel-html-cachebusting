@@ -1,4 +1,7 @@
 # laravel-html-cachebusting
+
+**This repository is archived. If this is still a thing in 2017 and beyond, please contact me on [Twitter](https://twitter.com/MetalMatze). I might transfer this project to you!**
+
 This package extends Laravel's ```HtmlBuilder``` with simple cache busting, either by enabling it via a configuration and using the built-in ```HTML::script``` and ```HTML::style```, or more explicitly by replacing  calls to ```HTML::script``` and ```HTML::style``` in templates with ```HTML::scriptBust``` and ```HTML::styleBust```. Both methods bust browser cache by placing an md5 checksum into the filename of your asset.
 
 For a cache buster providing more functionality, have a look at [Laravel Cachebuster](https://github.com/TheMonkeys/laravel-cachebuster).
